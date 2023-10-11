@@ -11,7 +11,7 @@ import 'package:islami_app/tabs/setting.dart';
 
 import 'My_Theme_data.dart';
 
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class HomeScreen extends StatefulWidget {
   static const String routeName = "home";
 
@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
           width: double.infinity, fit: BoxFit.fill),
       Scaffold(
         appBar: AppBar(
-          title: Text("Islami", style: Theme.of(context).textTheme.bodyLarge),
+          title: Text(AppLocalizations.of(context)!.app_title, style: Theme.of(context).textTheme.bodyLarge),
         ),
         bottomNavigationBar: BottomNavigationBar(
             currentIndex: index,
@@ -41,25 +41,25 @@ class _HomeScreenState extends State<HomeScreen> {
               BottomNavigationBarItem(
 
                   icon: Icon(Icons.settings),
-                  label: "Setting",
+                  label: AppLocalizations.of(context)!.setting,
                   backgroundColor: MyThemeData.primary),
               BottomNavigationBarItem(
                   icon: ImageIcon(AssetImage(
                     "assets/images/radio.png",
                   )),
-                  label: "Radio",
+                  label: AppLocalizations.of(context)!.radio,
                   backgroundColor: MyThemeData.primary),
               BottomNavigationBarItem(
                   icon: ImageIcon(AssetImage("assets/images/sebha.png")),
-                  label: "Sebha",
+                  label: AppLocalizations.of(context)!.sebha,
                   backgroundColor: MyThemeData.primary),
               BottomNavigationBarItem(
                   icon: ImageIcon(AssetImage("assets/images/ahadeth.png")),
-                  label: "Ahadeth",
+                  label: AppLocalizations.of(context)!.ahadeth,
                   backgroundColor: MyThemeData.primary),
               BottomNavigationBarItem(
                   icon: ImageIcon(AssetImage("assets/images/quran.png")),
-                  label: "Quran",
+                  label: AppLocalizations.of(context)!.quran,
                   backgroundColor: MyThemeData.primary),
             ]),
         body:tabs[index] ,
