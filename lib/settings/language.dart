@@ -16,24 +16,26 @@ class _LanguageState extends State<Language> {
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<AppConfigProvider>(context);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        InkWell(onTap: () {
-          provider.ChangeLanguage("en");
-        },
-            child: provider.appLanguage=="en"?
-                getSelected(AppLocalizations.of(context)!.english):getUnSelected(AppLocalizations.of(context)!.english)
-        ),
-        InkWell(
-            onTap: () {
-              provider.ChangeLanguage("ar");
-            },
-            child: provider.appLanguage=="ar"?
-    getSelected(AppLocalizations.of(context)!.arabic):getUnSelected(AppLocalizations.of(context)!.arabic)
+    return Container(color: MyThemeData.blackColor,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          InkWell(onTap: () {
+            provider.ChangeLanguage("en");
+          },
+              child: provider.appLanguage=="en"?
+                  getSelected(AppLocalizations.of(context)!.english):getUnSelected(AppLocalizations.of(context)!.english)
+          ),
+          InkWell(
+              onTap: () {
+                provider.ChangeLanguage("ar");
+              },
+              child: provider.appLanguage=="ar"?
+      getSelected(AppLocalizations.of(context)!.arabic):getUnSelected(AppLocalizations.of(context)!.arabic)
 
-    )
-      ],
+      )
+        ],
+      ),
     );
   }
 
