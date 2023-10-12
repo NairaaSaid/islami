@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 
 import '../My_Theme_data.dart';
 import '../ahadeth_model.dart';
+import '../provider/app_config_provider.dart';
 import 'ahadeth_details.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -22,6 +24,8 @@ class _AhadethTabsState extends State<AhadethTabs> {
 
   @override
   Widget build(BuildContext context) {
+    var provider=Provider.of<AppConfigProvider>(context);
+
     if(hadethList.isEmpty){loadHadeth();}
 
     return Center(
@@ -30,18 +34,21 @@ class _AhadethTabsState extends State<AhadethTabs> {
         Image.asset("assets/images/ahadeth_image.png"),
         Divider(
           thickness: 2,
-          color: MyThemeData.primary,
+            color: provider.appTheme==ThemeMode.light?MyThemeData.primary:MyThemeData.YellowColor
         ),
         Text(
           AppLocalizations.of(context)!.hadeth_name,
-          style: Theme.of(context)
+          style:provider.appTheme==ThemeMode.light? Theme.of(context)
               .textTheme
               .bodySmall!
-              .copyWith(color: MyThemeData.blackColor),
+              .copyWith(color: MyThemeData.blackColor):Theme.of(context)
+              .textTheme
+              .bodySmall!
+              .copyWith(color: MyThemeData.WhiteColor)
         ),
         Divider(
           thickness: 2,
-          color: MyThemeData.primary,
+          color: provider.appTheme==ThemeMode.light?MyThemeData.primary:MyThemeData.YellowColor
         ),
         hadethList.isEmpty?
             Center(child: CircularProgressIndicator(
@@ -61,16 +68,21 @@ class _AhadethTabsState extends State<AhadethTabs> {
 
 
                 },
-                child: Text(hadethList[index].title,textAlign: TextAlign.center,style: Theme
+                child: Text(hadethList[index].title,textAlign: TextAlign.center,style:
+                    provider.appTheme==ThemeMode.light?
+                Theme
                     .of(context)
                     .textTheme
-                    .bodySmall!.copyWith(color: MyThemeData.blackColor)),
+                    .bodySmall!.copyWith(color: MyThemeData.blackColor):Theme
+                        .of(context)
+                        .textTheme
+                        .bodySmall!.copyWith(color: MyThemeData.WhiteColor)),
               );
             },separatorBuilder: (context, index) {
               return Divider(
                 thickness: 1,
                 indent: 50,
-                color: MyThemeData.primary,
+                color:provider.appTheme==ThemeMode.light? MyThemeData.WhiteColor:MyThemeData.blackColor,
                 endIndent: 50,
 
               );

@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:islami_app/provider/app_config_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../My_Theme_data.dart';
 import '../sura_details.dart';
@@ -129,28 +131,43 @@ class QuranTabs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+var provider=Provider.of<AppConfigProvider>(context);
     return Center(
+
       child: Column(
         children: [
+
           Image.asset("assets/images/quran_image.png"),
           Divider(
             thickness: 2,
-            color: MyThemeData.primary,
+            color: provider.appTheme==ThemeMode.light?
+            Theme.of(context).primaryColor :
+            MyThemeData.YellowColor
           ),
-          Text(AppLocalizations.of(context)!.sura_name, style: Theme
-              .of(context)
+          Text(
+
+              AppLocalizations.of(context)!.sura_name, style:provider.appTheme==ThemeMode.light?
+          Theme.of(context)
+              .textTheme
+              .bodyLarge!.copyWith(color: MyThemeData.blackColor):
+          Theme.of(context)
               .textTheme
               .bodyLarge),
+
           Divider(
-            thickness: 2,
-            color: MyThemeData.primary,
+              thickness: 2,
+              color: provider.appTheme==ThemeMode.light?
+              Theme.of(context).primaryColor :
+              MyThemeData.YellowColor
           ),
           Expanded(
             child: ListView.separated(
                 separatorBuilder: (context, index) => Divider(
                   thickness: 1,
                   indent: 50,
-                  color: MyThemeData.primary,
+                  color:  provider.appTheme==ThemeMode.light?
+                  Theme.of(context).primaryColor :
+                  MyThemeData.YellowColor,
                   endIndent: 50,
 
                 )
@@ -165,8 +182,10 @@ class QuranTabs extends StatelessWidget {
 
                 },
                 child: Text(
+
                   suraName[index],
-                  style: Theme.of(context).textTheme.bodySmall!.copyWith(color: MyThemeData.blackColor),
+                  style:provider.appTheme==ThemeMode.light?
+                  Theme.of(context).textTheme.bodySmall!.copyWith(color: MyThemeData.blackColor):Theme.of(context).textTheme.bodySmall!.copyWith(color: MyThemeData.WhiteColor),
                   textAlign: TextAlign.center,),
               );
             },

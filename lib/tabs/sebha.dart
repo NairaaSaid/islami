@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../My_Theme_data.dart';
+import '../provider/app_config_provider.dart';
 
 
 class SebhaTabs extends StatefulWidget {
@@ -24,6 +26,8 @@ class _SebhaTabsState extends State<SebhaTabs> {
 
   @override
   Widget build(BuildContext context) {
+    var provider=Provider.of<AppConfigProvider>(context);
+
     return Center(
       child: Column(
         children: [
@@ -46,31 +50,33 @@ class _SebhaTabsState extends State<SebhaTabs> {
 
 
            child: Image.asset("assets/images/body_of_seb7a.png")),
-          Text("عدد التسبيحات",style: Theme.of(context).textTheme.bodyMedium,),
+          Text("عدد التسبيحات",style:provider.appTheme==ThemeMode.light?
+          Theme.of(context).textTheme.bodyMedium!.copyWith(color: MyThemeData.blackColor):Theme.of(context).textTheme.bodyMedium,),
           Container(
             height: 50,
             width: 50,
             decoration: BoxDecoration(
-              color: Color(0xFFB7935F),
+              color: provider.appTheme==ThemeMode.light? MyThemeData.primary:MyThemeData.blackColor,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Center(
               child: Text(
                 '$counter',
-                style: TextStyle(
-                    color: Colors.black, fontSize: 24),
+    style:provider.appTheme==ThemeMode.light?
+    Theme.of(context).textTheme.bodyMedium!.copyWith(color: MyThemeData.blackColor):Theme.of(context).textTheme.bodyMedium,),
               ),
             ),
-          ),
+          //),
           SizedBox(height: 10,),
           Container(
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
-              color: MyThemeData.primary),
+              color:provider.appTheme==ThemeMode.light? MyThemeData.primary:MyThemeData.YellowColor),
             child: Text(
               tasbeh[tasbehCount],
-              style: Theme.of(context).textTheme.bodySmall
+              style: provider.appTheme==ThemeMode.light?
+    Theme.of(context).textTheme.bodyMedium:Theme.of(context).textTheme.bodyMedium!.copyWith(color: MyThemeData.blackColor,)
             ),
           ),
       ],),

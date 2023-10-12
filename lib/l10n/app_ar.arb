@@ -4,13 +4,18 @@
 "sebha":"السبحة",
 "ahadeth":"الاحاديث",
 "radio":"الاذاعة",
-"setting":"اعدادات",
+"setting":"الاعدادات",
 "sura_name":"اسم السورة",
 
-"hadeth_name":"اسم الحديث"
+"hadeth_name":"اسم الحديث",
 
+"arabic":"العربية",
+"english":"الانجليزية",
+"light":"مضئ",
+"dark":"ليلى",
+"theme":"النمط",
 
-
+"language":"اللغة"
 
 
 

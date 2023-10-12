@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../My_Theme_data.dart';
+import '../provider/app_config_provider.dart';
 
 
 class RadioTabs extends StatelessWidget {
@@ -10,6 +12,8 @@ class RadioTabs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var provider=Provider.of<AppConfigProvider>(context);
+
     return Column(
 
 
@@ -18,13 +22,13 @@ class RadioTabs extends StatelessWidget {
 
         child: Image.asset("assets/images/radio_image.png"),
       ),
-       Text("اذاعة القران الكريم",style: Theme.of(context).textTheme.bodyLarge),
+       Text("اذاعة القران الكريم",style:provider.appTheme==ThemeMode.light? Theme.of(context).textTheme.bodyLarge!.copyWith(color: MyThemeData.blackColor):Theme.of(context).textTheme.bodyLarge),
         SizedBox(height: 50),
         Row(
           children: [
-            Expanded(child: Icon(Icons.skip_previous,color: MyThemeData.primary,)),
-            Expanded(child: Icon(Icons.play_arrow,color: MyThemeData.primary,)),
-            Expanded(child: Icon(Icons.skip_next,color: MyThemeData.primary,)),
+            Expanded(child: Icon(Icons.skip_previous,color:provider.appTheme==ThemeMode.light? MyThemeData.primary:MyThemeData.YellowColor)),
+            Expanded(child: Icon(Icons.play_arrow, color:provider.appTheme==ThemeMode.light? MyThemeData.primary:MyThemeData.YellowColor)),
+            Expanded(child: Icon(Icons.skip_next,color:provider.appTheme==ThemeMode.light? MyThemeData.primary:MyThemeData.YellowColor)),
           ],
         ),
       ],);

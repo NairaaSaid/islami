@@ -3,11 +3,13 @@ import 'dart:collection';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:islami_app/provider/app_config_provider.dart';
 import 'package:islami_app/tabs/ahadeth.dart';
 import 'package:islami_app/tabs/quran.dart';
 import 'package:islami_app/tabs/radio.dart';
 import 'package:islami_app/tabs/sebha.dart';
-import 'package:islami_app/tabs/setting.dart';
+import 'package:islami_app/settings/setting.dart';
+import 'package:provider/provider.dart';
 
 import 'My_Theme_data.dart';
 
@@ -24,12 +26,17 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var provider=Provider.of<AppConfigProvider>(context);
     return Stack(children: [
-      Image.asset("assets/images/background.png",
+      provider.appTheme==ThemeMode.light?Image.asset("assets/images/background.png",
+          width: double.infinity, fit: BoxFit.fill):Image.asset("assets/images/backgroundDark.png",
           width: double.infinity, fit: BoxFit.fill),
+
       Scaffold(
         appBar: AppBar(
-          title: Text(AppLocalizations.of(context)!.app_title, style: Theme.of(context).textTheme.bodyLarge),
+          title: Text(AppLocalizations.of(context)!.app_title, style:
+              provider.appTheme==ThemeMode.light?
+          Theme.of(context).textTheme.bodyLarge!.copyWith(color: MyThemeData.blackColor):Theme.of(context).textTheme.bodyLarge!.copyWith(color: MyThemeData.WhiteColor)),
         ),
         bottomNavigationBar: BottomNavigationBar(
             currentIndex: index,
@@ -52,7 +59,8 @@ class _HomeScreenState extends State<HomeScreen> {
               BottomNavigationBarItem(
                   icon: ImageIcon(AssetImage("assets/images/sebha.png")),
                   label: AppLocalizations.of(context)!.sebha,
-                  backgroundColor: MyThemeData.primary),
+                  backgroundColor: MyThemeData.primary
+              ),
               BottomNavigationBarItem(
                   icon: ImageIcon(AssetImage("assets/images/ahadeth.png")),
                   label: AppLocalizations.of(context)!.ahadeth,

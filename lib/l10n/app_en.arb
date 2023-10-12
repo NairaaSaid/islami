@@ -7,9 +7,13 @@
 "setting":"Setting",
 "sura_name":"Sura Name",
 
-"hadeth_name":"Hadeth Name"
-
-
+"hadeth_name":"Hadeth Name",
+"arabic":"Arabic",
+"english":"English",
+"light":"Light",
+"dark":"Dark",
+"theme":"Theme",
+"language":"Language"
 
 
 

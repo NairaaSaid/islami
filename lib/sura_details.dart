@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:islami_app/provider/app_config_provider.dart';
 import 'package:islami_app/sura_model.dart';
+import 'package:provider/provider.dart';
 
 import 'My_Theme_data.dart';
 
@@ -18,6 +20,7 @@ class _SuraDetailsState extends State<SuraDetails> {
 
   @override
   Widget build(BuildContext context) {
+    var provider=Provider.of<AppConfigProvider>(context);
     var args = ModalRoute.of(context)?.settings.arguments as SuraModel;
     if (list.isEmpty) {
       loadFile(args.index);
@@ -25,8 +28,11 @@ class _SuraDetailsState extends State<SuraDetails> {
     return Container(
       decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/images/background.png"),
-              fit: BoxFit.fill)),
+
+              image: provider.appTheme==ThemeMode.light?AssetImage("assets/images/background.png"):AssetImage("assets/images/backgroundDark.png"),
+              fit: BoxFit.fill)
+
+      ),
       child: Scaffold(
         appBar: AppBar(
             title: Text(
@@ -34,13 +40,18 @@ class _SuraDetailsState extends State<SuraDetails> {
           style: Theme.of(context).textTheme.bodyLarge,
         )),
         body: Card(
+          color: provider.appTheme==ThemeMode.light? MyThemeData.WhiteColor:MyThemeData.primaryDark,
           elevation: 10,
           margin: EdgeInsets.all(15),
           shape: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20),
-              borderSide: BorderSide(color: MyThemeData.primary)),
+              borderSide: BorderSide(color:provider.appTheme==ThemeMode.light? MyThemeData.primary:MyThemeData.YellowColor)
+
+          ),
           child: ListView.separated(separatorBuilder: (context, index) => Divider(
-            thickness: 2,indent: 40,endIndent: 40,color: MyThemeData.primary,
+            thickness: 2,indent: 40,endIndent: 40,color:
+
+          provider.appTheme==ThemeMode.light? MyThemeData.primary:MyThemeData.WhiteColor
           ),
               itemBuilder: (context, index) {
                 return Directionality(textDirection: TextDirection.rtl,
@@ -48,7 +59,10 @@ class _SuraDetailsState extends State<SuraDetails> {
                     padding: const EdgeInsets.all(18.0),
                     child: Text(
                      " ${list[index]} (${index+1})",
-                      textAlign: TextAlign.center,style: Theme.of(context).textTheme.bodySmall!.copyWith(color: MyThemeData.blackColor),
+                      textAlign: TextAlign.center,style:provider.appTheme==ThemeMode.light?
+                    Theme.of(context).textTheme.bodySmall!.copyWith(color: MyThemeData.blackColor):
+                    Theme.of(context).textTheme.bodySmall
+
                     ),
                   ),
                 );
